@@ -7,8 +7,21 @@ const log = console.log;
 yargs.command({
   command: 'add',
   describe: 'Add a new note',
-  handler() {
-    log(chalk.blue('adding note'));
+  builder: {
+    title: {
+      describe: 'Note title',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Note body',
+      demandOption: true,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    log(chalk.white('Title:', argv.title));
+    log(chalk.white('Body:', argv.body));
   },
 });
 
@@ -39,4 +52,4 @@ yargs.command({
   },
 });
 
-log(yargs.argv);
+yargs.parse();
